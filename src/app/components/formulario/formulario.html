@@ -1,43 +1,168 @@
-<section class="w-full flex items-center justify-center">
-  <form class="w-full flex flex-col items-center justify-center gap-4">
+<form
+  class="w-full flex flex-col items-center justify-center gap-4"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Nome -->
+  <div class="w-105 lg:w-160 flex flex-col gap-1">
     <input
       type="text"
-      class="border border-white p-3 rounded-full w-105 lg:w-160"
+      formControlName="nome"
+      class="border border-white p-3 rounded-full w-full"
       placeholder="Digite seu nome completo"
     />
+    <span
+      *ngIf="f['nome'].invalid && f['nome'].touched"
+      class="text-red-300 text-xs pl-3"
+    >
+      Nome é obrigatório.
+    </span>
+  </div>
+
+  <!-- Celular -->
+  <div class="w-105 lg:w-160 flex flex-col gap-1">
     <input
       type="text"
-      class="border border-white p-3 rounded-full w-105 lg:w-160"
-      placeholder="Digite o numero de seu celular"
+      formControlName="celular"
+      (input)="onCelularInput($event)"
+      maxlength="15"
+      class="border border-white p-3 rounded-full w-full"
+      placeholder="(xx) xxxxx-xxxx"
     />
+    <span
+      *ngIf="f['celular'].invalid && f['celular'].touched"
+      class="text-red-300 text-xs pl-3"
+    >
+      Informe um celular válido no formato (xx) xxxxx-xxxx.
+    </span>
+  </div>
+
+  <!-- CPF -->
+  <div class="w-105 lg:w-160 flex flex-col gap-1">
     <input
       type="text"
-      class="border border-white p-3 rounded-full w-105 lg:w-160"
-      placeholder="Digite seu cpf - (somente números)"
+      formControlName="cpf"
+      (input)="onCpfInput($event)"
+      maxlength="14"
+      inputmode="numeric"
+      class="border border-white p-3 rounded-full w-full"
+      placeholder="Digite seu CPF - (somente números)"
     />
+    <span
+      *ngIf="f['cpf'].invalid && f['cpf'].touched"
+      class="text-red-300 text-xs pl-3"
+    >
+      Informe um CPF válido no formato 000.000.000-00.
+    </span>
+  </div>
+
+  <!-- Data de Nascimento -->
+  <div class="w-105 lg:w-160 flex flex-col gap-1">
     <input
       type="text"
-      class="border border-white p-3 rounded-full w-105 lg:w-160"
-      placeholder="Digite sua Data de Nascimento"
+      formControlName="dataNascimento"
+      (input)="onDataNascimentoInput($event)"
+      maxlength="10"
+      inputmode="numeric"
+      class="border border-white p-3 rounded-full w-full"
+      placeholder="Data de Nascimento (dd/mm/aaaa)"
     />
+    <span
+      *ngIf="f['dataNascimento'].invalid && f['dataNascimento'].touched"
+      class="text-red-300 text-xs pl-3"
+    >
+      Informe uma data de nascimento válida (dd/mm/aaaa).
+    </span>
+  </div>
+
+  <!-- Estado -->
+  <div class="w-105 lg:w-160 flex flex-col gap-1">
+    <select
+      formControlName="estado"
+      (change)="onEstadoChange($event)"
+      class="border border-white p-3 rounded-full w-full bg-transparent text-white"
+    >
+      <option value="" disabled selected>Selecione seu Estado</option>
+      <option *ngFor="let estado of estados" [value]="estado.sigla">
+        {{ estado.nome }}
+      </option>
+    </select>
+    <span
+      *ngIf="f['estado'].invalid && f['estado'].touched"
+      class="text-red-300 text-xs pl-3"
+    >
+      Selecione um estado.
+    </span>
+  </div>
+
+  <!-- Município (habilitado após escolher o Estado) -->
+  <div class="w-105 lg:w-160 flex flex-col gap-1">
+    <select
+      formControlName="municipio"
+      class="border border-white p-3 rounded-full w-full bg-transparent text-white disabled:opacity-50"
+    >
+      <option value="" disabled selected>
+        {{ isLoadingMunicipios ? 'Carregando municípios...' : 'Selecione seu Município' }}
+      </option>
+      <option *ngFor="let municipio of municipios" [value]="municipio">
+        {{ municipio }}
+      </option>
+    </select>
+    <span
+      *ngIf="f['municipio'].invalid && f['municipio'].touched"
+      class="text-red-300 text-xs pl-3"
+    >
+      Selecione um município.
+    </span>
+  </div>
+
+  <!-- E-mail -->
+  <div class="w-105 lg:w-160 flex flex-col gap-1">
     <input
-      type="text"
-      class="border border-white p-3 rounded-full w-105 lg:w-160"
-      placeholder="Digite seu Estado"
-    />
-    <input
-      type="text"
-      class="border border-white p-3 rounded-full w-105 lg:w-160"
+      type="email"
+      formControlName="email"
+      class="border border-white p-3 rounded-full w-full"
       placeholder="Digite seu Email"
     />
-    <p class="w-full lg:w-160">
-      *Ao clicar em enviar, eu aceito receber informações dos produtos BRASILCAP, de acordo com a
-      política de privacidade da empresa.
-    </p>
-    <button
-      class="bg-white text-black w-full lg:w-160 p-2 rounded-full hover:bg-yellowCap-500 hover:scale-105 duration-300"
+    <span
+      *ngIf="f['email'].invalid && f['email'].touched"
+      class="text-red-300 text-xs pl-3"
     >
-      Enviar
-    </button>
-  </form>
-</section>
+      Informe um e-mail válido.
+    </span>
+  </div>
+
+  <p class="w-full lg:w-160">
+    *Ao clicar em enviar, eu aceito receber informações dos produtos BRASILCAP, de acordo com a
+    política de privacidade da empresa.
+  </p>
+
+  <button
+    type="submit"
+    [disabled]="isSubmitting"
+    class="bg-white text-black w-full lg:w-160 p-2 rounded-full hover:bg-yellowCap-500 hover:scale-105 duration-300 disabled:opacity-60 disabled:hover:scale-100"
+  >
+    {{ isSubmitting ? 'Enviando...' : 'Enviar' }}
+  </button>
+
+  <p *ngIf="submitError" class="text-red-300 text-sm">
+    Ocorreu um erro ao enviar. Tente novamente em instantes.
+  </p>
+</form>
+
+<!-- Modal de sucesso (padrão daisyUI) -->
+<dialog class="modal" [class.modal-open]="showSuccessModal">
+  <div class="modal-box text-center">
+    <h3 class="font-bold text-lg text-black">Sucesso!</h3>
+    <p class="py-4 text-black">Email enviado com sucesso.</p>
+    <div class="modal-action justify-center">
+      <button
+        type="button"
+        (click)="closeModalAndRefresh()"
+        class="btn bg-black text-white rounded-full px-6 hover:bg-yellowCap-500 hover:text-black"
+      >
+        OK
+      </button>
+    </div>
+  </div>
+</dialog>

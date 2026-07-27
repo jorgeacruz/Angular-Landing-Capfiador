@@ -1,0 +1,6 @@
+/* Estilos complementares. A maior parte do visual usa classes
+   utilitárias do Tailwind diretamente no template. */
+
+select option {
+  color: #000;
+}

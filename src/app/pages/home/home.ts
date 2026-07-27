@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
-import { Formulario } from '../../components/formulario/formulario';
 import { CarousselComponent } from '../../components/caroussel/caroussel';
 import { FaqAccordionComponent } from '../../components/faq-questions/faq-accordion';
 import { RouterLink, Router } from '@angular/router';
+import { FormularioComponent } from '../../components/formulario/formulario';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Formulario, CarousselComponent, FaqAccordionComponent, RouterLink],
+  imports: [CarousselComponent, FaqAccordionComponent, RouterLink, FormularioComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
