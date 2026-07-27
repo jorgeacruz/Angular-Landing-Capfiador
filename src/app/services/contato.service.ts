@@ -35,7 +35,7 @@ export class ContatoService {
   private readonly emailJsUrl = 'https://api.emailjs.com/api/v1.0/email/send';
 
   // 🔧 Substitua pelos valores da sua conta EmailJS
-  private readonly serviceId = 'service_3x9as5x';
+  private readonly serviceId = 'service_54b0yhn';
   private readonly templateId = 'template_1tsdsa6';
   private readonly publicKey = 'IEKIt16szD8mT7mnw';
 
