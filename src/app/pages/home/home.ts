@@ -14,8 +14,7 @@ import { FormularioComponent } from '../../components/formulario/formulario';
 })
 export class Home {
   constructor(private readonly router: Router) {}
-
   irParaContato(): void {
-    this.router.navigate(['/'], { fragment: 'Inicio' });
+    this.router.navigate(['/'], { fragment: 'Contato' });
   }
 }
