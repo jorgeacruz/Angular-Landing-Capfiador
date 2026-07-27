@@ -35,9 +35,9 @@ export class ContatoService {
   private readonly emailJsUrl = 'https://api.emailjs.com/api/v1.0/email/send';
 
   // 🔧 Substitua pelos valores da sua conta EmailJS
-  private readonly serviceId = 'SEU_SERVICE_ID';
-  private readonly templateId = 'SEU_TEMPLATE_ID';
-  private readonly publicKey = 'SUA_PUBLIC_KEY';
+  private readonly serviceId = 'service_3x9as5x';
+  private readonly templateId = 'template_1tsdsa6';
+  private readonly publicKey = 'IEKIt16szD8mT7mnw';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -53,8 +53,8 @@ export class ContatoService {
         data_nascimento: dados.dataNascimento,
         estado: dados.estado,
         municipio: dados.municipio,
-        email: dados.email
-      }
+        email: dados.email,
+      },
     };
 
     return this.http.post(this.emailJsUrl, payload);
