@@ -3,11 +3,12 @@ import { Menu } from './components/menu/menu';
 import { Footer } from './components/footer/footer';
 import { Home } from './pages/home/home';
 import { Spiner } from './components/spiner/spiner';
+import { Login } from './pages/login/login';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Menu, Footer, Home, Spiner],
+  imports: [Menu, Footer, Home, Spiner, Login],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
