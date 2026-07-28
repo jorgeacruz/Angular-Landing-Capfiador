@@ -30,12 +30,13 @@ export interface ContatoFormData {
  * um POST para a sua API, ex:
  *   return this.http.post('https://sua-api.com/contato', dados);
  */
+
 @Injectable({ providedIn: 'root' })
 export class ContatoService {
   private readonly emailJsUrl = 'https://api.emailjs.com/api/v1.0/email/send';
 
   // 🔧 Substitua pelos valores da sua conta EmailJS
-  private readonly serviceId = 'service_54b0yhn';
+  private readonly serviceId = 'service_3x9as5x';
   private readonly templateId = 'template_1tsdsa6';
   private readonly publicKey = 'IEKIt16szD8mT7mnw';
 
@@ -50,7 +51,7 @@ export class ContatoService {
         nome: dados.nome,
         celular: dados.celular,
         cpf: dados.cpf,
-        data_nascimento: dados.dataNascimento,
+        dataNascimento: dados.dataNascimento,
         estado: dados.estado,
         municipio: dados.municipio,
         email: dados.email,

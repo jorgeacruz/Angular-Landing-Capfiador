@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -30,7 +30,29 @@ export class FormularioComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly localidadesService: LocalidadesService,
     private readonly contatoService: ContatoService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
+
+  private clearForm(): void {
+    // Limpa todos os campos
+    this.form.reset();
+
+    // Limpa lista de municípios
+    this.municipios = [];
+
+    // Desabilita novamente o select de município
+    this.form.get('municipio')?.disable();
+
+    // Remove estados de validação
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
+
+    Object.keys(this.form.controls).forEach((key) => {
+      this.form.get(key)?.setErrors(null);
+    });
+
+    this.cdr.markForCheck();
+  }
 
   ngOnInit(): void {
     this.estados = this.localidadesService.getEstados();
@@ -93,10 +115,12 @@ export class FormularioComponent implements OnInit {
         this.municipios = municipios;
         this.isLoadingMunicipios = false;
         this.form.get('municipio')?.enable();
+        this.cdr.markForCheck();
       },
       error: () => {
         this.isLoadingMunicipios = false;
         this.municipios = [];
+        this.cdr.markForCheck();
       },
     });
   }
@@ -117,13 +141,13 @@ export class FormularioComponent implements OnInit {
         this.isSubmitting = false;
         this.submitSuccess = true;
         this.showSuccessModal = true;
-        this.form.reset();
-        this.municipios = [];
-        this.form.get('municipio')?.disable();
+
+        this.clearForm();
       },
       error: () => {
         this.isSubmitting = false;
         this.submitError = true;
+        this.cdr.markForCheck();
       },
     });
   }
@@ -132,8 +156,12 @@ export class FormularioComponent implements OnInit {
    * Fecha o modal de sucesso e recarrega a página.
    * Chamado ao clicar no botão "OK" do modal.
    */
-  closeModalAndRefresh(): void {
+  closeModal(): void {
     this.showSuccessModal = false;
-    window.location.reload();
+
+    this.submitSuccess = false;
+    this.submitError = false;
+
+    this.clearForm();
   }
 }
