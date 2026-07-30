@@ -11,10 +11,7 @@
       class="border border-white p-3 rounded-full w-full"
       placeholder="Digite seu nome completo"
     />
-    <span
-      *ngIf="f['nome'].invalid && f['nome'].touched"
-      class="text-red-300 text-xs pl-3"
-    >
+    <span *ngIf="f['nome'].invalid && f['nome'].touched" class="text-red-300 text-xs pl-3">
       Nome é obrigatório.
     </span>
   </div>
@@ -29,10 +26,7 @@
       class="border border-white p-3 rounded-full w-full"
       placeholder="(xx) xxxxx-xxxx"
     />
-    <span
-      *ngIf="f['celular'].invalid && f['celular'].touched"
-      class="text-red-300 text-xs pl-3"
-    >
+    <span *ngIf="f['celular'].invalid && f['celular'].touched" class="text-red-300 text-xs pl-3">
       Informe um celular válido no formato (xx) xxxxx-xxxx.
     </span>
   </div>
@@ -48,10 +42,7 @@
       class="border border-white p-3 rounded-full w-full"
       placeholder="Digite seu CPF - (somente números)"
     />
-    <span
-      *ngIf="f['cpf'].invalid && f['cpf'].touched"
-      class="text-red-300 text-xs pl-3"
-    >
+    <span *ngIf="f['cpf'].invalid && f['cpf'].touched" class="text-red-300 text-xs pl-3">
       Informe um CPF válido no formato 000.000.000-00.
     </span>
   </div>
@@ -87,10 +78,7 @@
         {{ estado.nome }}
       </option>
     </select>
-    <span
-      *ngIf="f['estado'].invalid && f['estado'].touched"
-      class="text-red-300 text-xs pl-3"
-    >
+    <span *ngIf="f['estado'].invalid && f['estado'].touched" class="text-red-300 text-xs pl-3">
       Selecione um estado.
     </span>
   </div>
@@ -124,10 +112,7 @@
       class="border border-white p-3 rounded-full w-full"
       placeholder="Digite seu Email"
     />
-    <span
-      *ngIf="f['email'].invalid && f['email'].touched"
-      class="text-red-300 text-xs pl-3"
-    >
+    <span *ngIf="f['email'].invalid && f['email'].touched" class="text-red-300 text-xs pl-3">
       Informe um e-mail válido.
     </span>
   </div>
@@ -158,7 +143,7 @@
     <div class="modal-action justify-center">
       <button
         type="button"
-        (click)="closeModalAndRefresh()"
+        (click)="closeModal()"
         class="btn bg-black text-white rounded-full px-6 hover:bg-yellowCap-500 hover:text-black"
       >
         OK
