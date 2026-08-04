@@ -144,14 +144,6 @@ Arquivos estáticos (como o `faq-data.json`) devem ficar na pasta **`public/`**,
 
 ---
 
-## 📌 Próximos passos sugeridos
-
-- [ ] Tornar o menu totalmente responsivo, com versão otimizada para mobile (em andamento).
-- [ ] Painel administrativo para adicionar/remover perguntas do FAQ pela interface.
-- [ ] Envio dinâmico do e-mail de destino a partir do campo preenchido pelo usuário.
-
----
-
 ## 📄 Licença
 
 Este projeto é de uso interno / institucional. Ajuste esta seção conforme a licença aplicável ao seu repositório.
