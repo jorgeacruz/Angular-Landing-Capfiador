@@ -1,4 +1,4 @@
-# Cap Fiador — Landing Page (Angular)
+# Landing Page (Angular)
 
 Landing page institucional desenvolvida em **Angular (standalone components)** com **Tailwind CSS**, contendo carrossel promocional, FAQ dinâmico, formulário de contato com validações e integração de envio de e-mail.
 
